@@ -1,0 +1,82 @@
+﻿@model Transaction.Models.TR
+
+@{
+    ViewData["Title"] = "লেনদেন ব্যবস্থাপনা";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+    body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .card { border: none; border-radius: 15px; }
+    .card-header { border-radius: 15px 15px 0 0 !important; font-weight: bold; }
+    .btn-save { border-radius: 10px; padding: 10px; font-weight: bold; transition: 0.3s; }
+    .btn-save:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .form-label { font-weight: 500; color: #444; }
+</style>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h4 class="mb-0"><i class="fas fa-wallet me-2"></i>নতুন ট্রানজ্যাকশন যোগ করুন</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                        <div class="mb-3">
+                            <label class="form-label">শিরোনাম (Title)</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-pen text-muted"></i></span>
+                                <input asp-for="Title" class="form-control" placeholder="যেমন: বাজার খরচ" required />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label class="form-label">পরিমাণ (Amount)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">৳</span>
+                                    <input asp-for="Amount" type="number" step="0.01" class="form-control" placeholder="0.00" required />
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label class="form-label">ধরণ (Type)</label>
+                                <select asp-for="Type" class="form-select">
+                                    <option value="Income">আয় (Income)</option>
+                                    <option value="Expense">ব্যয় (Expense)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">ক্যাটাগরি (Category)</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-list text-muted"></i></span>
+                                <input asp-for="Category" class="form-control" placeholder="যেমন: খাবার, বিল" />
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">তারিখ (Date)</label>
+                            <input asp-for="Date" type="datetime-local" class="form-control" required />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-save w-100 shadow-sm">
+                            <i class="fas fa-save me-2"></i>সেভ করুন
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="/" class="text-decoration-none text-muted small">
+                    <i class="fas fa-arrow-left me-1"></i> ড্যাশবোর্ডে ফিরে যান
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
